@@ -109,6 +109,19 @@
 		$.get("/search?searchText="+searchText,
 		// 응답이 오면 호출되는 콜백 함수
 		function(data, status) {
+			$("tbody").empty();
+			
+			
+			data.data1.forEach(function(faq) {
+			    let tr = $('<tr></tr>');
+			    let td1 = $('<td></td>').text(faq.id);
+			    let td2 = $('<td></td>').text(faq.question);
+			    let td3 = $('<td></td>').text(faq.answer);
+			    
+			    tr.append(td1).append(td2).append(td3);
+			    $('tbody').append(tr);
+			});
+			
 			console.log(data);
 			//$("#text").html(data + "<br>" + status); // 전송받은 데이터와 전송 성공 여부를 보여줌.
 		});
