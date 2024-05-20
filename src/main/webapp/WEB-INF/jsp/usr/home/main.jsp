@@ -209,7 +209,7 @@
 	    const formattedTime = '' + padWithZero(currentDate.getHours()) + '00';
 	    
 	    //https://www.data.go.kr/data/15084084/openapi.do에서 api키를 가져오세요.
-	    const API_KEY = 'yourApiKey';
+	    const API_KEY = 'vr0ubJoWF%2FZCBBE8bgxowqe1GxaLkYbIHNkelllo9%2BEzJi7LlPJKVShezYe5WEfBssUCvFlPEoBmpSpozSX%2BQg%3D%3D';
 	    const url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtNcst?serviceKey='+ API_KEY +'&pageNo=1&numOfRows=5&nx='+address.x+'&ny='+address.y+'&dataType=JSON&base_date='+formattedDate+'&base_time='+formattedTime;
 	    console.log(url);
 	    const response = await fetch(url);
@@ -236,6 +236,30 @@
 
 	    let span2 = $('<span></span>').text(resultStr);
 	    $("#addressResult").append(span1).append(span2);
+
+	    //다음에서 키 발급 https://www.data.go.kr/iim/api/selectAPIAcountView.do
+		const API_KEY2 = 'yourkey2';
+		const url2 = "https://apis.data.go.kr/B551011/KorService1/searchKeyword1?serviceKey="
+				+ API_KEY2
+				+ "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp&_type=json&keyword="
+				+ addressFullName;
+		console.log(url2);
+		const response2 = await fetch(url2);
+		const data2 = await response2.json();
+		console.log(data2.response.body.items.item);
+		console.log(typeof data2.response.body.items.item);
+		
+		if (data2) {
+		    if (data2.response.body.items && Array.isArray(data2.response.body.items.item)) {
+		        let items = data2.response.body.items.item;
+		        items.forEach(function(item) {
+		            let span3 = $('<span></span>').text(JSON.stringify(item));
+		            $("#addressResult").append(span3);
+		        });
+		    } else {
+		        console.error('items is not in the expected format:', data2.response.body.items);
+		    }
+		}
 	}
 </script>
 </html>
