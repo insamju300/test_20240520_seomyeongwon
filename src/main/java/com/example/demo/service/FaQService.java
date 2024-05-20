@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.FaQRepository;
+import com.example.demo.vo.Address;
 import com.example.demo.vo.FaQ;
 
 
@@ -18,6 +19,12 @@ public class FaQService {
 	public List<FaQ> search(String searchText) {
 		// TODO Auto-generated method stub
 		return faQRepository.search(searchText);
+	}
+
+
+	public List<Address> searchAddress(String searchAddress) {
+		// TODO Auto-generated method stub
+		return faQRepository.searchAddress(searchAddress);
 	}
 
 //	@Autowired

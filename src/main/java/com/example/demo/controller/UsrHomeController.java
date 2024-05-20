@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.service.FaQService;
+import com.example.demo.vo.Address;
 import com.example.demo.vo.FaQ;
 import com.example.demo.vo.ResultData;
 
@@ -41,5 +42,16 @@ public class UsrHomeController {
     	
     }
 
-
+    @GetMapping("/searchAddress")
+    @ResponseBody
+    public ResultData<List<Address>> searchAddress(String searchAddress) {
+    	List<Address> addressList= faqService.searchAddress(searchAddress);
+    	
+    	
+    	ResultData<List<Address>> rs = ResultData.from("S-1", "FaQ데이터 리스트 습득", "주소 리스트", addressList);
+    	
+    	return rs;
+    	
+    }
+    
 }
